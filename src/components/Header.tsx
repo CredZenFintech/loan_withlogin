@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X, ArrowRight, LogOut } from 'lucide-react';
-import logo from '../assets/logo.jpg';
-// adjust path as needed
-// Adjust path if not using alias
+import logo from '../assets/webfino_golden.png';
 
 interface HeaderProps {
   onApplyLoan: () => void;
@@ -16,36 +14,96 @@ const Header = ({ onApplyLoan, onLogin, onNavigate, user, onLogout }: HeaderProp
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
-      <div className="container mx-auto px-3 py-1">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900/20 backdrop-blur-xl border-b border-gray-700/30 shadow-2xl">
+      {/* Animated background gradients */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-32 h-32 bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-full blur-2xl animate-pulse"></div>
+        <div className="absolute top-0 right-1/4 w-24 h-24 bg-gradient-to-r from-purple-600/10 to-pink-600/10 rounded-full blur-2xl animate-pulse" style={{animationDelay: '2s'}}></div>
+      </div>
+      
+      <div className="container mx-auto px-4 py-3 relative z-10">
         <div className="flex items-center justify-between">
           
-         {/* Logo and Title */}
-<div
-  className="flex items-center space-x-3 cursor-pointer"
-  onClick={() => onNavigate('home')}
->
-  <div className="w-20 h-20 rounded-full overflow-hidden border border-gray-300 shadow-sm">
-    <img src={logo} alt="WebFino Logo" className="w-full h-full object-cover" />
-  </div>
-  <span className="text-xl font-bold text-gray-800">WebFino</span>
-</div>
+          {/* Logo and Title */}
+          <div
+            className="flex items-center space-x-4 cursor-pointer group"
+            onClick={() => onNavigate('home')}
+          >
+            <div className="relative">
+              <div className="w-14 h-14 rounded-xl overflow-hidden bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-sm border border-blue-500/30 shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300 group-hover:scale-105">
+                <img src={logo} alt="WebFino Logo" className="w-full h-full object-cover" />
+              </div>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-400/20 to-purple-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors duration-300">WebFino</span>
+              <span className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors duration-300">Financial Solutions</span>
+            </div>
+          </div>
 
-
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8 text-gray-300">
             {user?.isLoggedIn ? (
               <>
-                <button onClick={() => onNavigate('dashboard')} className="text-gray-700 hover:text-blue-600 transition-colors">Dashboard</button>
-                <button onClick={() => onNavigate('contact')} className="text-gray-700 hover:text-blue-600 transition-colors">Contact</button>
+                <button
+                  onClick={() => onNavigate('dashboard')}
+                  className="relative px-4 py-2 rounded-lg hover:text-white transition-all duration-300 font-medium group hover:bg-gray-800/30 backdrop-blur-sm"
+                >
+                  <span className="relative z-10">Dashboard</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+                <button
+                  onClick={() => onNavigate('contact')}
+                  className="relative px-4 py-2 rounded-lg hover:text-white transition-all duration-300 font-medium group hover:bg-gray-800/30 backdrop-blur-sm"
+                >
+                  <span className="relative z-10">Contact</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
               </>
             ) : (
               <>
-                <button onClick={() => onNavigate('home')} className="text-gray-700 hover:text-blue-600 transition-colors">Home</button>
-                <button onClick={() => onNavigate('about')} className="text-gray-700 hover:text-blue-600 transition-colors">About</button>
-                <button onClick={() => onNavigate('partners')} className="text-gray-700 hover:text-blue-600 transition-colors">Partners</button>
-                <button onClick={() => onNavigate('contact')} className="text-gray-700 hover:text-blue-600 transition-colors">Contact</button>
-                <button onClick={() => onNavigate('careers')} className="text-gray-700 hover:text-blue-600 transition-colors">Careers</button>
+                <button
+                  onClick={() => onNavigate('home')}
+                  className="relative px-4 py-2 rounded-lg hover:text-white transition-all duration-300 font-medium group hover:bg-gray-800/30 backdrop-blur-sm"
+                >
+                  <span className="relative z-10">Home</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+                <button
+                  onClick={() => onNavigate('about')}
+                  className="relative px-4 py-2 rounded-lg hover:text-white transition-all duration-300 font-medium group hover:bg-gray-800/30 backdrop-blur-sm"
+                >
+                  <span className="relative z-10">About</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+                <button
+                  onClick={() => onNavigate('services')}
+                  className="relative px-4 py-2 rounded-lg hover:text-white transition-all duration-300 font-medium group hover:bg-gray-800/30 backdrop-blur-sm"
+                >
+                  <span className="relative z-10">Services</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+                <button
+                  onClick={() => onNavigate('partners')}
+                  className="relative px-4 py-2 rounded-lg hover:text-white transition-all duration-300 font-medium group hover:bg-gray-800/30 backdrop-blur-sm"
+                >
+                  <span className="relative z-10">Partners</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+                <button
+                  onClick={() => onNavigate('contact')}
+                  className="relative px-4 py-2 rounded-lg hover:text-white transition-all duration-300 font-medium group hover:bg-gray-800/30 backdrop-blur-sm"
+                >
+                  <span className="relative z-10">Contact</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+                <button
+                  onClick={() => onNavigate('careers')}
+                  className="relative px-4 py-2 rounded-lg hover:text-white transition-all duration-300 font-medium group hover:bg-gray-800/30 backdrop-blur-sm"
+                >
+                  <span className="relative z-10">Careers</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
               </>
             )}
           </nav>
@@ -54,35 +112,39 @@ const Header = ({ onApplyLoan, onLogin, onNavigate, user, onLogout }: HeaderProp
           <div className="hidden md:flex items-center space-x-4">
             {user?.isLoggedIn ? (
               <>
-                <button 
+                <button
                   onClick={onApplyLoan}
-                  className="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all flex items-center space-x-2"
+                  className="relative px-6 py-3 bg-gradient-to-r from-blue-600/80 to-purple-600/80 backdrop-blur-sm text-white rounded-xl hover:from-blue-600 hover:to-purple-600 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-blue-500/25 border border-blue-500/30 group transform hover:scale-105"
                 >
-                  <span>Apply for Loan</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span className="font-semibold">Apply for Loan</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400/20 to-purple-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
-                <button 
+                <button
                   onClick={onLogout}
-                  className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors flex items-center space-x-2"
+                  className="relative flex items-center space-x-2 px-4 py-2 text-gray-400 hover:text-white transition-all duration-300 rounded-lg hover:bg-gray-800/30 backdrop-blur-sm group"
                 >
-                  <LogOut className="w-4 h-4" />
-                  <span>Logout</span>
+                  <LogOut className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+                  <span className="font-medium">Logout</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-red-600/20 to-pink-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
               </>
             ) : (
               <>
-                <button 
+                <button
                   onClick={onLogin}
-                  className="px-4 py-2 text-blue-600 hover:text-blue-700 transition-colors"
+                  className="relative px-5 py-2 text-blue-400 hover:text-white transition-all duration-300 font-semibold rounded-lg hover:bg-gray-800/30 backdrop-blur-sm group border border-blue-500/30 hover:border-blue-400/50"
                 >
-                  Login
+                  <span className="relative z-10">Login</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-600/20 to-cyan-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
-                <button 
+                <button
                   onClick={onApplyLoan}
-                  className="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all flex items-center space-x-2"
+                  className="relative px-6 py-3 bg-gradient-to-r from-blue-600/80 to-purple-600/80 backdrop-blur-sm text-white rounded-xl hover:from-blue-600 hover:to-purple-600 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-blue-500/25 border border-blue-500/30 group transform hover:scale-105"
                 >
-                  <span>Apply for Loan</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span className="font-semibold">Apply for Loan</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400/20 to-purple-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
               </>
             )}
@@ -90,69 +152,155 @@ const Header = ({ onApplyLoan, onLogin, onNavigate, user, onLogout }: HeaderProp
 
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden"
+            className="md:hidden text-gray-300 hover:text-white transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
           </button>
         </div>
 
-        {/* Mobile Nav */}
+        {/* Mobile Navigation Menu */}
         {isMenuOpen && (
-          <nav className="md:hidden mt-4 pb-4 border-t border-gray-200 pt-4">
-            <div className="flex flex-col space-y-4">
+          <nav className="md:hidden mt-4 border-t border-gray-700/30 pt-4 space-y-3 text-gray-300 bg-gray-900/20 backdrop-blur-xl rounded-b-xl">
+            {user?.isLoggedIn ? (
+              <>
+                <button
+                  onClick={() => {
+                    onNavigate('dashboard');
+                    setIsMenuOpen(false);
+                  }}
+                  className="w-full text-left px-4 py-3 rounded-lg hover:text-white transition-all duration-300 font-semibold hover:bg-gray-800/30 backdrop-blur-sm group relative"
+                >
+                  <span className="relative z-10">Dashboard</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+                <button
+                  onClick={() => {
+                    onNavigate('contact');
+                    setIsMenuOpen(false);
+                  }}
+                  className="w-full text-left px-4 py-3 rounded-lg hover:text-white transition-all duration-300 font-semibold hover:bg-gray-800/30 backdrop-blur-sm group relative"
+                >
+                  <span className="relative z-10">Contact</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => {
+                    onNavigate('home');
+                    setIsMenuOpen(false);
+                  }}
+                  className="w-full text-left px-4 py-3 rounded-lg hover:text-white transition-all duration-300 font-semibold hover:bg-gray-800/30 backdrop-blur-sm group relative"
+                >
+                  <span className="relative z-10">Home</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+                <button
+                  onClick={() => {
+                    onNavigate('about');
+                    setIsMenuOpen(false);
+                  }}
+                  className="w-full text-left px-4 py-3 rounded-lg hover:text-white transition-all duration-300 font-semibold hover:bg-gray-800/30 backdrop-blur-sm group relative"
+                >
+                  <span className="relative z-10">About</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+                <button
+                  onClick={() => {
+                    onNavigate('services');
+                    setIsMenuOpen(false);
+                  }}
+                  className="w-full text-left px-4 py-3 rounded-lg hover:text-white transition-all duration-300 font-semibold hover:bg-gray-800/30 backdrop-blur-sm group relative"
+                >
+                  <span className="relative z-10">Services</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+                <button
+                  onClick={() => {
+                    onNavigate('partners');
+                    setIsMenuOpen(false);
+                  }}
+                  className="w-full text-left px-4 py-3 rounded-lg hover:text-white transition-all duration-300 font-semibold hover:bg-gray-800/30 backdrop-blur-sm group relative"
+                >
+                  <span className="relative z-10">Partners</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+                <button
+                  onClick={() => {
+                    onNavigate('contact');
+                    setIsMenuOpen(false);
+                  }}
+                  className="w-full text-left px-4 py-3 rounded-lg hover:text-white transition-all duration-300 font-semibold hover:bg-gray-800/30 backdrop-blur-sm group relative"
+                >
+                  <span className="relative z-10">Contact</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+                <button
+                  onClick={() => {
+                    onNavigate('careers');
+                    setIsMenuOpen(false);
+                  }}
+                  className="w-full text-left px-4 py-3 rounded-lg hover:text-white transition-all duration-300 font-semibold hover:bg-gray-800/30 backdrop-blur-sm group relative"
+                >
+                  <span className="relative z-10">Careers</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+              </>
+            )}
+            <div className="pt-4 space-y-3 border-t border-gray-700/30">
               {user?.isLoggedIn ? (
                 <>
-                  <button onClick={() => onNavigate('dashboard')} className="text-gray-700 hover:text-blue-600 transition-colors text-left">Dashboard</button>
-                  <button onClick={() => onNavigate('contact')} className="text-gray-700 hover:text-blue-600 transition-colors text-left">Contact</button>
+                  <button
+                    onClick={() => {
+                      onApplyLoan();
+                      setIsMenuOpen(false);
+                    }}
+                    className="relative w-full px-6 py-3 bg-gradient-to-r from-blue-600/80 to-purple-600/80 backdrop-blur-sm text-white rounded-xl hover:from-blue-600 hover:to-purple-600 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-blue-500/25 border border-blue-500/30 group transform hover:scale-105"
+                  >
+                    <span className="font-semibold">Apply for Loan</span>
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400/20 to-purple-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </button>
+                  <button
+                    onClick={() => {
+                      onLogout();
+                      setIsMenuOpen(false);
+                    }}
+                    className="relative flex items-center space-x-2 px-4 py-3 text-gray-400 hover:text-white transition-all duration-300 w-full text-left rounded-lg hover:bg-gray-800/30 backdrop-blur-sm group"
+                  >
+                    <LogOut className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+                    <span className="font-medium">Logout</span>
+                    <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-red-600/20 to-pink-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </button>
                 </>
               ) : (
                 <>
-                  <button onClick={() => onNavigate('home')} className="text-gray-700 hover:text-blue-600 transition-colors text-left">Home</button>
-                  <button onClick={() => onNavigate('about')} className="text-gray-700 hover:text-blue-600 transition-colors text-left">About</button>
-                  <button onClick={() => onNavigate('partners')} className="text-gray-700 hover:text-blue-600 transition-colors text-left">Partners</button>
-                  <button onClick={() => onNavigate('contact')} className="text-gray-700 hover:text-blue-600 transition-colors text-left">Contact</button>
-                  <button onClick={() => onNavigate('careers')} className="text-gray-700 hover:text-blue-600 transition-colors text-left">Careers</button>
+                  <button
+                    onClick={() => {
+                      onLogin();
+                      setIsMenuOpen(false);
+                    }}
+                    className="relative w-full text-left px-4 py-3 text-blue-400 hover:text-white transition-all duration-300 font-semibold rounded-lg hover:bg-gray-800/30 backdrop-blur-sm group border border-blue-500/30 hover:border-blue-400/50"
+                  >
+                    <span className="relative z-10">Login</span>
+                    <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-600/20 to-cyan-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </button>
+                  <button
+                    onClick={() => {
+                      onApplyLoan();
+                      setIsMenuOpen(false);
+                    }}
+                    className="relative w-full px-6 py-3 bg-gradient-to-r from-blue-600/80 to-purple-600/80 backdrop-blur-sm text-white rounded-xl hover:from-blue-600 hover:to-purple-600 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-blue-500/25 border border-blue-500/30 group transform hover:scale-105"
+                  >
+                    <span className="font-semibold">Apply for Loan</span>
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400/20 to-purple-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </button>
                 </>
               )}
-
-              {/* Mobile Buttons */}
-              <div className="flex flex-col space-y-2 pt-4">
-                {user?.isLoggedIn ? (
-                  <>
-                    <button 
-                      onClick={onApplyLoan}
-                      className="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all flex items-center space-x-2"
-                    >
-                      <span>Apply for Loan</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                    <button 
-                      onClick={onLogout}
-                      className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors text-left flex items-center space-x-2"
-                    >
-                      <LogOut className="w-4 h-4" />
-                      <span>Logout</span>
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <button 
-                      onClick={onLogin}
-                      className="px-4 py-2 text-blue-600 hover:text-blue-700 transition-colors text-left"
-                    >
-                      Login
-                    </button>
-                    <button 
-                      onClick={onApplyLoan}
-                      className="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all flex items-center space-x-2"
-                    >
-                      <span>Apply for Loan</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </>
-                )}
-              </div>
             </div>
           </nav>
         )}

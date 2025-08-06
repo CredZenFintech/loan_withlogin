@@ -1,6 +1,7 @@
 import React from 'react';
 import { Twitter, Linkedin, Github, Mail, Phone, MapPin } from 'lucide-react';
-import logo from '../assets/logo.jpg'; // ✅ Make sure this is correct
+import logo from '../assets/webfino_golden.png'; // ✅ Make sure this is correct
+
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -11,7 +12,7 @@ const Footer = () => {
         {/* Brand & About */}
         <div>
           <div className="flex items-center mb-6">
-            <div className="w-20 h-20 rounded-full overflow-hidden bg-white mr-3">
+            <div className="w-14 h-14 rounded-xl overflow-hidden bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-sm border border-blue-500/30 shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300 group-hover:scale-105">
               <img src={logo} alt="WebFino Logo" className="w-full h-full object-contain" />
             </div>
             <span className="text-2xl font-bold">Web<span className="text-white">Fino</span></span>
@@ -56,16 +57,16 @@ const Footer = () => {
               <Mail className="w-5 h-5 text-blue-400 mt-1" />
               <div>
                 <p>support@webfino.com</p>
-                <p>shubhamsrivastava@webfino.com</p>
+                {/* <p>shubhamsrivastava@webfino.com</p> */}
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            {/* <div className="flex items-start gap-3">
               <Phone className="w-5 h-5 text-blue-400 mt-1" />
               <div>
                 <p>+918583061237</p>
                 <p>+919002004313</p>
               </div>
-            </div>
+            </div> */}
             <div className="flex items-start gap-3">
               <MapPin className="w-5 h-5 text-blue-400 mt-1" />
               <div>

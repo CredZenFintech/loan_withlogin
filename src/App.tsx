@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import AboutPage from './components/AboutPage';
@@ -12,11 +12,39 @@ import PartnersPage from './components/PartnersPage';
 import LoanApplication from './components/LoanApplication';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import ServicesPage from './components/ServicesPage';
 
 function App() {
   const [currentView, setCurrentView] = useState<string>('home');
   const [user, setUser] = useState<any>(null);
   const [authView, setAuthView] = useState<'login' | 'signup'>('login');
+
+  // Check for existing authentication on app load
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const userData = localStorage.getItem('userData');
+    
+    if (token && userData) {
+      try {
+        const parsedUserData = JSON.parse(userData);
+        // Validate that the token exists and user data is complete
+        if (parsedUserData.token && parsedUserData.email) {
+          setUser({
+            ...parsedUserData,
+            isLoggedIn: true
+          });
+        } else {
+          // Clear invalid data
+          localStorage.removeItem('token');
+          localStorage.removeItem('userData');
+        }
+      } catch (error) {
+        // Clear corrupted data
+        localStorage.removeItem('token');
+        localStorage.removeItem('userData');
+      }
+    }
+  }, []);
 
   const handleLogin = (userData: any) => {
     setUser(userData);
@@ -29,6 +57,9 @@ function App() {
   };
 
   const handleLogout = () => {
+    // Clear localStorage on logout
+    localStorage.removeItem('token');
+    localStorage.removeItem('userData');
     setUser(null);
     setCurrentView('home');
   };
@@ -52,6 +83,8 @@ function App() {
         return user?.isLoggedIn ? <Dashboard user={user} /> : <Login onLogin={handleLogin} onSwitchToSignup={() => setAuthView('signup')} />;
       case 'about':
         return <AboutPage />;
+      case 'services':
+        return <ServicesPage />;
       case 'partners':
         return <PartnersPage />;
       case 'contact':

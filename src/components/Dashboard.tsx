@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CreditCard, Clock, CheckCircle, XCircle, Eye, Download, Filter, Calendar, TrendingUp, DollarSign, FileText, User } from 'lucide-react';
+import { getLoanData } from '../services/leadServices';
 
 interface LoanApplication {
-  id: string;
-  amount: number;
-  purpose: string;
-  status: 'pending' | 'approved' | 'rejected' | 'disbursed';
-  appliedDate: string;
-  approvedDate?: string;
+  id: number; // Serial number
+  leadId: string;
+  loanAmount: number;
+  loanPurpose: string;
+  loanStatus: string;
+  createdAt: string;
   tenure: number;
-  interestRate: number;
+  interestRate?: number;
   emi?: number;
+  approvedDate?: string;
 }
 
 interface DashboardProps {
@@ -19,72 +21,82 @@ interface DashboardProps {
 
 const Dashboard: React.FC<DashboardProps> = ({ user }) => {
   const [selectedFilter, setSelectedFilter] = useState('all');
-  
-  // Dummy loan application data
-  const loanApplications: LoanApplication[] = [
-    {
-      id: 'WP001',
-      amount: 500000,
-      purpose: 'Home Renovation',
-      status: 'approved',
-      appliedDate: '2024-01-15',
-      approvedDate: '2024-01-16',
-      tenure: 24,
-      interestRate: 12.5,
-      emi: 23560
-    },
-    {
-      id: 'WP002',
-      amount: 300000,
-      purpose: 'Business Expansion',
-      status: 'disbursed',
-      appliedDate: '2023-12-10',
-      approvedDate: '2023-12-11',
-      tenure: 36,
-      interestRate: 13.2,
-      emi: 10450
-    },
-    {
-      id: 'WP003',
-      amount: 750000,
-      purpose: 'Medical Emergency',
-      status: 'pending',
-      appliedDate: '2024-01-20',
-      tenure: 48,
-      interestRate: 11.8,
-    },
-    {
-      id: 'WP004',
-      amount: 200000,
-      purpose: 'Education',
-      status: 'rejected',
-      appliedDate: '2023-11-25',
-      tenure: 24,
-      interestRate: 14.0,
+  const [userData, setUserData] = useState<any>(null);
+  const [loanApplications, setLoanApplications] = useState<LoanApplication[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Get user data from localStorage
+    const token = localStorage.getItem('token');
+    const storedUserData = localStorage.getItem('userData');
+    
+    if (storedUserData) {
+      setUserData(JSON.parse(storedUserData));
+    } else if (token) {
+      // If only token exists, try to get user info from token or use fallback
+      setUserData({ name: 'User' });
     }
-  ];
+
+    // Fetch loan data
+    const fetchLoanData = async () => {
+      try {
+        setLoading(true);
+        const token = localStorage.getItem('token');
+        if (token) {
+          const response = await getLoanData(token);
+          
+          // Transform API response to match our interface
+          const transformedData: LoanApplication[] = response.data.loanData.map((loan: any, index: number) => ({
+            id: index + 1, // Serial number starting from 1
+            leadId: loan.leadId,
+            loanAmount: loan.loanAmount,
+            loanPurpose: loan.loanPurpose,
+            loanStatus: loan.loanStatus,
+            createdAt: loan.createdAt,
+            tenure: loan.tenure,
+            interestRate: loan.interestRate || 'Yet to approved',
+            emi: loan.emi || 'Yet to approved',
+            approvedDate: loan.approvedDate || 'Yet to approved'
+          }));
+          
+          setLoanApplications(transformedData);
+        }
+      } catch (err) {
+        setError('Failed to fetch loan data');
+        console.error('Error fetching loan data:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLoanData();
+  }, []);
+
 
   const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'approved':
+    switch (status.toUpperCase()) {
+      case 'APPROVED':
         return 'bg-green-900/30 text-green-400 border-green-500/30';
-      case 'disbursed':
+      case 'DISBURSED':
         return 'bg-blue-900/30 text-blue-400 border-blue-500/30';
-      case 'rejected':
+      case 'REJECTED':
         return 'bg-red-900/30 text-red-400 border-red-500/30';
+      case 'PENDING':
       default:
         return 'bg-yellow-900/30 text-yellow-400 border-yellow-500/30';
     }
   };
 
   const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'approved':
+    switch (status.toUpperCase()) {
+      case 'APPROVED':
         return <CheckCircle className="w-4 h-4" />;
-      case 'disbursed':
+      case 'DISBURSED':
         return <DollarSign className="w-4 h-4" />;
-      case 'rejected':
+      case 'REJECTED':
         return <XCircle className="w-4 h-4" />;
+      case 'PENDING':
       default:
         return <Clock className="w-4 h-4" />;
     }
@@ -92,16 +104,32 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
 
   const filteredApplications = selectedFilter === 'all' 
     ? loanApplications 
-    : loanApplications.filter(app => app.status === selectedFilter);
+    : loanApplications.filter(app => app.loanStatus.toLowerCase() === selectedFilter.toLowerCase());
 
   const stats = {
     total: loanApplications.length,
-    approved: loanApplications.filter(app => app.status === 'approved' || app.status === 'disbursed').length,
-    pending: loanApplications.filter(app => app.status === 'pending').length,
+    approved: loanApplications.filter(app => app.loanStatus.toUpperCase() === 'APPROVED' || app.loanStatus.toUpperCase() === 'DISBURSED').length,
+    pending: loanApplications.filter(app => app.loanStatus.toUpperCase() === 'PENDING').length,
     totalAmount: loanApplications
-      .filter(app => app.status === 'approved' || app.status === 'disbursed')
-      .reduce((sum, app) => sum + app.amount, 0)
+      .filter(app => app.loanStatus.toUpperCase() === 'APPROVED' || app.loanStatus.toUpperCase() === 'DISBURSED')
+      .reduce((sum, app) => sum + app.loanAmount, 0)
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-white text-xl">Loading loan data...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-red-400 text-xl">{error}</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
@@ -118,7 +146,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h1 className="text-3xl font-bold text-white mb-2">Welcome back, {user?.fullName || 'User'}!</h1>
+              <h1 className="text-3xl font-bold text-white mb-2">Welcome back, {userData?.name || user?.fullName || 'User'}!</h1>
               <p className="text-gray-400">Here's your loan portfolio overview</p>
             </div>
             <div className="flex items-center space-x-4">
@@ -225,26 +253,26 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
                       <div className="text-sm font-medium text-white">{application.id}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-white">₹{application.amount.toLocaleString()}</div>
-                      <div className="text-sm text-gray-400">{application.purpose}</div>
+                      <div className="text-sm text-white">₹{application.loanAmount.toLocaleString()}</div>
+                      <div className="text-sm text-gray-400">{application.loanPurpose}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex items-center space-x-1 px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(application.status)}`}>
-                        {getStatusIcon(application.status)}
-                        <span className="capitalize">{application.status}</span>
+                      <span className={`inline-flex items-center space-x-1 px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(application.loanStatus)}`}>
+                        {getStatusIcon(application.loanStatus)}
+                        <span className="capitalize">{application.loanStatus.toLowerCase()}</span>
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                      {new Date(application.appliedDate).toLocaleDateString()}
+                      {new Date(application.createdAt).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {application.emi ? (
+                      {application.emi && typeof application.emi === 'number' ? (
                         <div>
-                          <div className="text-sm text-white">₹{application.emi.toLocaleString()}/month</div>
-                          <div className="text-sm text-gray-400">{application.tenure} months @ {application.interestRate}%</div>
+                          <div className="text-sm text-white">₹{typeof application.emi === 'number' ? application.emi.toLocaleString() : application.emi}/month</div>
+                          <div className="text-sm text-gray-400">{application.tenure} months @ {typeof application.interestRate === 'number' ? application.interestRate + '%' : application.interestRate}</div>
                         </div>
                       ) : (
-                        <span className="text-gray-500">-</span>
+                        <span className="text-gray-500">Yet to approved</span>
                       )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">

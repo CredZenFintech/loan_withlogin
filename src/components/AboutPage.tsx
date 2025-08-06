@@ -215,11 +215,18 @@ const AboutPage = () => {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
+      <section className="py-20 bg-black relative overflow-hidden">
+        {/* 3D Background Effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-blue-900/20"></div>
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-purple-600/10 to-pink-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        </div>
+        
+        <div className="relative z-10 container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Leadership Team</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <h2 className="text-4xl font-bold text-white mb-4">Leadership Team</h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
               Meet the visionaries behind Webfino's success
             </p>
           </div>
@@ -229,19 +236,20 @@ const AboutPage = () => {
               { name: 'Saawan Saah', role: 'Head of Operations' , photo: '/sawan.jpg'  },
               { name: 'Shubham Srivastava', role: 'Director',  photo: '/shubham.jpg' },
               { name: 'Ayush Tiwari', role: 'CO-Founder', photo: '/ayush.jpg' },
-              { name: 'Rohit Sunar', role: 'Founder', photo: '/rohit.png' }
+              { name: 'Rohit Sharma', role: 'Founder', photo: '/rohit.png' },
             ].map((member, index) => (
-              <div key={index} className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-8 text-center border border-gray-200">
-    <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4">
-      <img 
-        src={member.photo} 
-        alt={member.name} 
-        className="w-full h-full object-cover" 
-      />
-    </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{member.name}</h3>
-                <p className="text-blue-600 font-medium mb-2">{member.role}</p>
-                <p className="text-sm text-gray-600">{member.experience}</p>
+              <div key={index} className="bg-gray-900/30 backdrop-blur-sm border border-gray-700/50 rounded-xl p-8 text-center hover:bg-gray-900/40 transition-all duration-300 transform hover:scale-105 group">
+                <div className="relative mb-6 mx-auto w-32 h-32 rounded-full overflow-hidden shadow-lg group-hover:shadow-xl transition-shadow">
+                  <img
+                    src={member.photo}
+                    alt={member.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-2">{member.name}</h3>
+                <p className="text-blue-400 font-medium mb-4">{member.role}</p>
+                <div className="w-12 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto"></div>
               </div>
             ))}
           </div>

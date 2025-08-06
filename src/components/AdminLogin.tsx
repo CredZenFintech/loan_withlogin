@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
-import { Phone, Lock, ArrowRight, Shield } from 'lucide-react';
+import { Mail, Lock, ArrowRight, Shield } from 'lucide-react';
 
 interface AdminLoginProps {
   onLogin: () => void;
 }
 
 const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
-  const [step, setStep] = useState<'mobile' | 'otp'>('mobile');
-  const [mobile, setMobile] = useState('');
+  const [step, setStep] = useState<'email' | 'otp'>('email');
+  const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleMobileSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     
-    if (mobile !== '1234567890') {
-      setError('Invalid mobile number');
+    if (email !== 'admin@webfino.com') {
+      setError('Invalid email address');
       return;
     }
     
@@ -54,24 +54,24 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
             </div>
             <h1 className="text-2xl font-bold text-gray-900 mb-2">Admin Login</h1>
             <p className="text-gray-600">
-              {step === 'mobile' ? 'Enter your mobile number to continue' : 'Enter the OTP sent to your mobile'}
+              {step === 'email' ? 'Enter your email address to continue' : 'Enter the OTP sent to your email'}
             </p>
           </div>
 
-          {step === 'mobile' ? (
-            <form onSubmit={handleMobileSubmit} className="space-y-6">
+          {step === 'email' ? (
+            <form onSubmit={handleEmailSubmit} className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Mobile Number
+                  Email Address
                 </label>
                 <div className="relative">
-                  <Phone className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <Mail className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                   <input
-                    type="tel"
-                    value={mobile}
-                    onChange={(e) => setMobile(e.target.value)}
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Enter mobile number"
+                    placeholder="Enter email address"
                     required
                   />
                 </div>
@@ -117,7 +117,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
                   />
                 </div>
                 <p className="text-sm text-gray-500 mt-2">
-                  OTP sent to {mobile}
+                  OTP sent to {email}
                 </p>
               </div>
 
@@ -130,7 +130,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
               <div className="flex space-x-3">
                 <button
                   type="button"
-                  onClick={() => setStep('mobile')}
+                  onClick={() => setStep('email')}
                   className="flex-1 px-4 py-3 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                 >
                   Back
