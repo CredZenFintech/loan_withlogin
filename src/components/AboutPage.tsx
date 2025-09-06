@@ -1,5 +1,9 @@
 import React from 'react';
 import { Award, Users, Globe, TrendingUp, Target, Lightbulb, Heart, Shield, Zap, CheckCircle } from 'lucide-react';
+import sawanImage from '../assets/sawan.jpg'
+import shubhamImage from '../assets/shubham.jpg';
+import ayushImage from '../assets/ayush.jpg';
+import rohitImage from '../assets/rohit.png';
 
 const AboutPage = () => {
   const stats = [
@@ -233,10 +237,10 @@ const AboutPage = () => {
 
           <div className="grid md:grid-cols-4 gap-8">
             {[
-              { name: 'Saawan Saah', role: 'Head of Operations' , photo: '/sawan.jpg'  },
-              { name: 'Shubham Srivastava', role: 'Director',  photo: '/shubham.jpg' },
-              { name: 'Ayush Tiwari', role: 'CO-Founder', photo: '/ayush.jpg' },
-              { name: 'Rohit Sharma', role: 'Founder', photo: '/rohit.png' },
+              { name: 'Saawan Saah', role: 'Head of Operations', photo: sawanImage },
+              { name: 'Shubham Srivastava', role: 'Director', photo: shubhamImage },
+              { name: 'Ayush Tiwari', role: 'CO-Founder', photo: ayushImage }, 
+              { name: 'Rohit Sharma', role: 'Founder', photo: rohitImage },
             ].map((member, index) => (
               <div key={index} className="bg-gray-900/30 backdrop-blur-sm border border-gray-700/50 rounded-xl p-8 text-center hover:bg-gray-900/40 transition-all duration-300 transform hover:scale-105 group">
                 <div className="relative mb-6 mx-auto w-32 h-32 rounded-full overflow-hidden shadow-lg group-hover:shadow-xl transition-shadow">

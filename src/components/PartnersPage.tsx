@@ -3,11 +3,15 @@ import {
   Building2, Globe, Award, CheckCircle,
   Smartphone, CreditCard, Layers3
 } from 'lucide-react';
+import banknboxLogo from '../assets/banknbox_logo.jpg';
 
 const PartnersPage = () => {
   const partner = {
     name: 'BankNBox',
-    logo: '/assets/banknbox_logo.jpg', // ✅ public folder path
+    logo: banknboxLogo,
+    logoAlt: 'BankNBox Logo',
+    logoWidth: 60,
+    logoHeight: 60,
     description: 'BankNBox is a Cairo-based fintech platform offering cloud-native digital banking, card processing, and acquiring services to banks and fintechs worldwide.',
     website: 'https://www.banknbox.com',
     since: '2006',
@@ -34,7 +38,7 @@ const PartnersPage = () => {
 
   const certs = [
     "PCI‑DSS Certified Platform",
-    "Visa / Mastercard / AMEX Integrated",
+    "Visa / Mastercard / AMEX Integrated", 
     "Secure Tokenization & PIN Services",
     "AI‑Powered Fraud Prevention"
   ];
@@ -54,7 +58,13 @@ const PartnersPage = () => {
         <div className="space-y-6">
           <div className="flex items-center space-x-4">
             <div className="bg-white/10 p-4 rounded-xl border border-white/10">
-              <Building2 className="w-8 h-8 text-blue-400" />
+              <img 
+                src={partner.logo}
+                alt={partner.logoAlt}
+                width={partner.logoWidth}
+                height={partner.logoHeight}
+                className="object-contain"
+              />
             </div>
             <div>
               <h2 className="text-2xl font-semibold">{partner.name}</h2>
@@ -73,7 +83,6 @@ const PartnersPage = () => {
             <span>Visit Website</span>
           </a>
         </div>
-
       </div>
 
       {/* Service Cards */}

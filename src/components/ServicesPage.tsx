@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   CreditCard, 
   Wallet, 
@@ -25,12 +25,66 @@ interface Service {
   delay: string;
 }
 
+interface InquiryFormData {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+  service: string;
+}
+
 interface ServiceCategory {
   title: string;
   services: Service[];
 }
 
 const ServicesPage = () => {
+  const [showInquiryModal, setShowInquiryModal] = useState(false);
+  const [selectedService, setSelectedService] = useState<string>("");
+  const [formData, setFormData] = useState<InquiryFormData>({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+    service: ""
+  });
+
+  const handleOpenInquiry = (serviceTitle: string) => {
+    setSelectedService(serviceTitle);
+    setFormData(prev => ({ ...prev, service: serviceTitle }));
+    setShowInquiryModal(true);
+  };
+
+  const handleCloseInquiry = () => {
+    setShowInquiryModal(false);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Here you would typically send the form data to your backend
+    console.log("Form submitted:", formData);
+    
+    // Reset form and close modal
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+      service: ""
+    });
+    setShowInquiryModal(false);
+    
+    // Show success message (you could implement a toast notification here)
+    alert("Thank you for your inquiry! We'll get back to you soon.");
+  };
   const serviceCategories: ServiceCategory[] = [
     {
       title: "ACCOUNTS",
@@ -286,7 +340,10 @@ const ServicesPage = () => {
 
                       {/* Action Button */}
                       <div className="pt-4 mt-auto">
-                        <button className={`w-full py-3 px-4 bg-gradient-to-r ${service.gradient} text-white rounded-lg font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105`}>
+                        <button 
+                          onClick={() => handleOpenInquiry(service.title)}
+                          className={`w-full py-3 px-4 bg-gradient-to-r ${service.gradient} text-white rounded-lg font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105`}
+                        >
                           Learn More
                         </button>
                       </div>
@@ -332,7 +389,119 @@ const ServicesPage = () => {
             transform: translateY(0);
           }
         }
+        
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out forwards;
+        }
       `}</style>
+
+      {/* Inquiry Form Modal */}
+      {showInquiryModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm" 
+            onClick={handleCloseInquiry}
+          ></div>
+          
+          {/* Modal */}
+          <div className="relative w-full max-w-md bg-gray-900 border border-blue-500/30 rounded-xl shadow-2xl shadow-blue-500/20 overflow-hidden animate-fadeIn z-10">
+            {/* Modal Header */}
+            <div className="bg-gradient-to-r from-blue-900 to-purple-900 p-6">
+              <h3 className="text-2xl font-bold text-white mb-1">
+                Inquiry for {selectedService}
+              </h3>
+              <p className="text-blue-200 text-sm">
+                Fill out the form below and our team will get back to you shortly.
+              </p>
+              <button 
+                onClick={handleCloseInquiry}
+                className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            {/* Modal Body */}
+            <div className="p-6">
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-blue-300 mb-1">Full Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 focus:border-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                    placeholder="Enter your full name"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-blue-300 mb-1">Email Address</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 focus:border-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                    placeholder="Enter your email address"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-blue-300 mb-1">Phone Number</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 focus:border-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                    placeholder="Enter your phone number"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-blue-300 mb-1">Your Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows={4}
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 focus:border-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all resize-none"
+                    placeholder="Tell us more about your inquiry"
+                  ></textarea>
+                </div>
+                
+                <button
+                  type="submit"
+                  className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                >
+                  Submit Inquiry
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

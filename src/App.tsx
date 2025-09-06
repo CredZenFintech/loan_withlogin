@@ -136,7 +136,7 @@ function App() {
       </div>
       
       {/* Back to Home Button */}
-      {currentView !== 'home' && currentView !== 'auth' && (
+      {/* {currentView !== 'home' && currentView !== 'auth' && (
         <div className="fixed bottom-6 left-6 z-40">
           <button
             onClick={() => setCurrentView('home')}
@@ -145,7 +145,7 @@ function App() {
             ← Back to Home
           </button>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
