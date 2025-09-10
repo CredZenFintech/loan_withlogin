@@ -193,7 +193,6 @@ const Login: React.FC<LoginProps> = ({ onLogin, onSwitchToSignup }) => {
               Sign up here
             </button>
           </p>
-          <p className="text-xs text-gray-600 mt-2">For demo: Any mobile number, OTP: 123456</p>
         </div>
       </div>
     </div>
