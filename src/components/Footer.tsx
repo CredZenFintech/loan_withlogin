@@ -15,7 +15,7 @@ const Footer = () => {
             <div className="w-14 h-14 rounded-xl overflow-hidden bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-sm border border-blue-500/30 shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300 group-hover:scale-105">
               <img src={logo} alt="WebFino Logo" className="w-full h-full object-contain" />
             </div>
-            <span className="text-2xl font-bold">Web<span className="text-white">Fino</span></span>
+            <span className="text-2xl font-bold"> Web<span className="text-white">Fino</span></span>
           </div>
           <p className="text-gray-300 text-sm leading-relaxed">
             Bridging finance and technology to create innovative solutions that empower businesses and
