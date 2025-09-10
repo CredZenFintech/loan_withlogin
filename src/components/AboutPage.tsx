@@ -238,9 +238,9 @@ const AboutPage = () => {
           <div className="grid md:grid-cols-4 gap-8">
             {[
               { name: 'Saawan Saah', role: 'Head of Operations', photo: sawanImage },
-              { name: 'Shubham Srivastava', role: 'Director', photo: shubhamImage },
-              { name: 'Ayush Tiwari', role: 'CO-Founder', photo: ayushImage }, 
-              { name: 'Rohit Sharma', role: 'Founder', photo: rohitImage },
+              { name: 'Shubham Srivastava', role: 'Founder & CEO', photo: shubhamImage },
+              { name: 'Ayush Tiwari', role: 'Director & CTO', photo: ayushImage }, 
+              { name: 'Rohit Sunar', role: 'Co-Founder & COO', photo: rohitImage },
             ].map((member, index) => (
               <div key={index} className="bg-gray-900/30 backdrop-blur-sm border border-gray-700/50 rounded-xl p-8 text-center hover:bg-gray-900/40 transition-all duration-300 transform hover:scale-105 group">
                 <div className="relative mb-6 mx-auto w-32 h-32 rounded-full overflow-hidden shadow-lg group-hover:shadow-xl transition-shadow">
