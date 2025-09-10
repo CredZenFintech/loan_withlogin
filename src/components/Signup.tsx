@@ -257,7 +257,6 @@ const Signup: React.FC<SignupProps> = ({ onSignup, onSwitchToLogin }) => {
               Login here
             </button>
           </p>
-          <p className="text-xs text-gray-600 mt-2">For demo: Use any details, OTP: 123456</p>
         </div>
       </div>
     </div>
