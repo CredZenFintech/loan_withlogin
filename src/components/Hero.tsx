@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Play, TrendingUp, Shield, Zap, CreditCard } from 'lucide-react';
+import { ArrowRight, Play, TrendingUp, Shield, Zap, CreditCard, DollarSign, Building2, Clock, CheckCircle, Users, Percent } from 'lucide-react';
 import EMICalculator from './EMICalculator';
 
 interface HeroProps {
@@ -40,6 +40,129 @@ const Hero: React.FC<HeroProps> = ({ onApplyLoan }) => {
               </p>
             </div>
 
+            {/* Product Cards Section - Enhanced */}
+            <div className="grid md:grid-cols-2 gap-6 my-12">
+              {/* Advance Salary Card - Enhanced */}
+              <div className="group relative overflow-hidden bg-gradient-to-br from-blue-900/50 to-blue-800/50 backdrop-blur-sm border-2 border-blue-400/40 rounded-2xl p-6 hover:from-blue-800/60 hover:to-blue-700/60 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30 hover:border-blue-300/60">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/30 to-transparent rounded-full blur-2xl"></div>
+                <div className="absolute -top-2 -right-2 w-6 h-6 bg-blue-400 rounded-full animate-ping opacity-20"></div>
+                
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-12 h-12 bg-gradient-to-r from-blue-400 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+                        <DollarSign className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-white">Advance Salary</h3>
+                        <p className="text-sm text-blue-200 font-medium">Get paid early</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-sm text-blue-200 font-medium">Up to</div>
+                      <div className="text-2xl font-bold text-white">75%</div>
+                      <div className="text-xs text-blue-300">of salary</div>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-3 mb-6">
+                    <div className="flex items-center space-x-3 text-sm text-gray-200">
+                      <div className="w-5 h-5 bg-green-500/20 rounded-full flex items-center justify-center">
+                        <CheckCircle className="w-3 h-3 text-green-400" />
+                      </div>
+                      <span className="font-medium">Instant approval in 2 minutes</span>
+                    </div>
+                    <div className="flex items-center space-x-3 text-sm text-gray-200">
+                      <div className="w-5 h-5 bg-blue-500/20 rounded-full flex items-center justify-center">
+                        <Percent className="w-3 h-3 text-blue-400" />
+                      </div>
+                      <span className="font-medium">Competitive interest rates</span>
+                    </div>
+                    <div className="flex items-center space-x-3 text-sm text-gray-200">
+                      <div className="w-5 h-5 bg-purple-500/20 rounded-full flex items-center justify-center">
+                        <Shield className="w-3 h-3 text-purple-400" />
+                      </div>
+                      <span className="font-medium">100% secure & paperless</span>
+                    </div>
+                    <div className="flex items-center space-x-3 text-sm text-gray-200">
+                      <div className="w-5 h-5 bg-yellow-500/20 rounded-full flex items-center justify-center">
+                        <Zap className="w-3 h-3 text-yellow-400" />
+                      </div>
+                      <span className="font-medium">Same-day disbursement</span>
+                    </div>
+                  </div>
+                  
+                  <button 
+                    onClick={onApplyLoan}
+                    className="w-full py-3.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-200 flex items-center justify-center space-x-2 group-hover:shadow-lg transform hover:scale-[1.02]"
+                  >
+                    <span>Apply for Advance Salary</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Working Capital Card - Enhanced */}
+              <div className="group relative overflow-hidden bg-gradient-to-br from-purple-900/50 to-purple-800/50 backdrop-blur-sm border-2 border-purple-400/40 rounded-2xl p-6 hover:from-purple-800/60 hover:to-purple-700/60 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/30 hover:border-purple-300/60">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-400/30 to-transparent rounded-full blur-2xl"></div>
+                <div className="absolute -top-2 -right-2 w-6 h-6 bg-purple-400 rounded-full animate-ping opacity-20"></div>
+                
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                        <Building2 className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-white">Working Capital</h3>
+                        <p className="text-sm text-purple-200 font-medium">Business growth</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-sm text-purple-200 font-medium">Up to</div>
+                      <div className="text-2xl font-bold text-white">₹50L</div>
+                      <div className="text-xs text-purple-300">for business</div>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-3 mb-6">
+                    <div className="flex items-center space-x-3 text-sm text-gray-200">
+                      <div className="w-5 h-5 bg-green-500/20 rounded-full flex items-center justify-center">
+                        <CheckCircle className="w-3 h-3 text-green-400" />
+                      </div>
+                      <span className="font-medium">Flexible repayment options</span>
+                    </div>
+                    <div className="flex items-center space-x-3 text-sm text-gray-200">
+                      <div className="w-5 h-5 bg-purple-500/20 rounded-full flex items-center justify-center">
+                        <TrendingUp className="w-3 h-3 text-purple-400" />
+                      </div>
+                      <span className="font-medium">Competitive interest rates</span>
+                    </div>
+                    <div className="flex items-center space-x-3 text-sm text-gray-200">
+                      <div className="w-5 h-5 bg-yellow-500/20 rounded-full flex items-center justify-center">
+                        <Zap className="w-3 h-3 text-yellow-400" />
+                      </div>
+                      <span className="font-medium">Quick approval process</span>
+                    </div>
+                    <div className="flex items-center space-x-3 text-sm text-gray-200">
+                      <div className="w-5 h-5 bg-blue-500/20 rounded-full flex items-center justify-center">
+                        <Users className="w-3 h-3 text-blue-400" />
+                      </div>
+                      <span className="font-medium">Dedicated relationship manager</span>
+                    </div>
+                  </div>
+                  
+                  <button 
+                    onClick={onApplyLoan}
+                    className="w-full py-3.5 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl font-semibold hover:from-purple-600 hover:to-purple-700 transition-all duration-200 flex items-center justify-center space-x-2 group-hover:shadow-lg transform hover:scale-[1.02]"
+                  >
+                    <span>Apply for Working Capital</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
             <div className="flex flex-col sm:flex-row gap-4">
               <button 
                 onClick={onApplyLoan}
@@ -58,7 +181,7 @@ const Hero: React.FC<HeroProps> = ({ onApplyLoan }) => {
             <div className="flex items-center space-x-8 pt-8">
               <div className="flex items-center space-x-2">
                 <TrendingUp className="w-5 h-5 text-green-500" />
-                <span className="text-sm text-gray-300">5 Min Approval</span>
+                <span className="text-sm text-gray-300">2 Min Approval</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Shield className="w-5 h-5 text-blue-500" />
@@ -66,7 +189,7 @@ const Hero: React.FC<HeroProps> = ({ onApplyLoan }) => {
               </div>
               <div className="flex items-center space-x-2">
                 <Zap className="w-5 h-5 text-purple-500" />
-                <span className="text-sm text-gray-300">Instant Disbursal</span>
+                <span className="text-sm text-gray-300">Same Day Disbursal</span>
               </div>
             </div>
           </div>
