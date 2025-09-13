@@ -58,7 +58,7 @@ const ContactPage = () => {
       icon: MapPin,
       title: 'Visit Our Office',
       description: 'Meet us in person for personalized service',
-      details: ['WebFino Solutions , Salt Lake Sector V', 'Kolkata,West Bengal'],
+      details: ['WebFino Finance ,RDB Boulevard''5th Floor,Sector -V Salt lake ''Kolkata,West Bengal India'],
       color: 'from-orange-500 to-orange-600'
     }
   ];
