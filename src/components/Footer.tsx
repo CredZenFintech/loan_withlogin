@@ -72,7 +72,7 @@ const Footer = () => {
             <div className="flex items-start gap-3">
               <MapPin className="w-5 h-5 text-blue-400 mt-1" />
               <div>
-                <p>Regus,RDB Boulevard</p>
+                <p>RDB Boulevard</p>
                 <p>5th Floor,Sector -V Salt lake</p>
                 <p>Kolkata WestBengal 700091, India</p>
               </div>
