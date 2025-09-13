@@ -72,8 +72,9 @@ const Footer = () => {
             <div className="flex items-start gap-3">
               <MapPin className="w-5 h-5 text-blue-400 mt-1" />
               <div>
-                <p>Salt Lake Sector V</p>
-                <p>Kolkata , West Bengal</p>
+                <p>Regus,RDB Boulevard</p>
+                <p>5th Floor,Sector -V Salt lake</p>
+                <p>Kolkata WestBengal 700091, India</p>
               </div>
             </div>
           </div>
@@ -83,13 +84,11 @@ const Footer = () => {
       {/* Bottom Bar */}
       <div className="mt-12 border-t border-gray-800 pt-6 text-sm flex flex-col md:flex-row justify-between items-center">
         <p className="text-gray-400">© {currentYear} WebFino Solutions Pvt. Ltd. All Rights Reserved.</p>
-        <p className="text-gray-400">256 Bit SSL Security</p>
+        <p>256 Bit SSL Security</p>
         <div className="flex gap-6 mt-4 md:mt-0">
           <a href="privacy" className="hover:text-white text-gray-400">Privacy Policy</a>
           <a href="#" className="hover:text-white text-gray-400">Terms of Service</a>
           <a href="#" className="hover:text-white text-gray-400">Cookie Policy</a>
-           <a href="#" className="hover:text-white text-gray-400">Disclaimer & Safety</a>
-           <a href="#" className="hover:text-white text-gray-400">Report vulnerability</a>
         </div>
       </div>
     </footer>
