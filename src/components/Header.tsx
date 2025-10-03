@@ -37,7 +37,7 @@ const Header = ({ onApplyLoan, onLogin, onNavigate, user, onLogout }: HeaderProp
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors duration-300">WebFino</span>
-              <span className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors duration-300">Financial Solutions</span>
+              <span className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors duration-300">Finance</span>
             </div>
           </div>
 
